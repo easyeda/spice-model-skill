@@ -4,11 +4,13 @@ description: Build, audit, or validate native ngspice models from datasheets and
 metadata:
   short-description: Evidence-based native ngspice model generation
   version: "1.1.2"
+  author: EasyEDA
+  license: Apache-2.0
 ---
 
 # Native ngspice model generation
 
-Build the highest useful external fidelity supported by authentic sources, intended circuit use, and native ngspice. Derive observable behavior, coupled equations, states and ports before implementing a complete candidate. More internal detail does not establish more fidelity. This package is **v1.1.2**; resolve all resources relative to it.
+Build the highest useful external fidelity supported by authentic sources, intended circuit use, and native ngspice. Derive observable behavior, coupled equations, states and ports before implementing a complete candidate. More internal detail does not establish more fidelity. This package is **v1.1.2**, authored by **EasyEDA** and released under the **Apache-2.0** license; resolve all resources relative to it.
 
 Use the conversation's scope and existing authorization. A model-generation request includes relevant source extraction, engine setup, meaningful verification, causal repairs and cleanup. Audit-only or design-only requests stay within those bounds. Ask for a materially missing requirement; do not ask again for work already authorized.
 

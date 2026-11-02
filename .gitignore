@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+
+# DSH session and rollback state (local to one machine)
+.dsh/
+
+# Private ngspice engine cache and other local tooling
+.tools/
+
+# Simulation run artifacts written by scripts/run_analysis.py
+# (fresh-run outputs must never be committed as evidence).
+# Analysis output directories are named by the caller; add your own here
+# if you create them inside this repository.
+/work/
+/init/
+result.json
+engine.log
+*.raw
+*.log
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
