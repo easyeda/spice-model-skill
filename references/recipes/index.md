@@ -1,0 +1,31 @@
+# Family recipe selection
+
+Select a source-supported architecture by observable domain and intended use. This table routes design; it is not a mandatory test matrix or a silicon schematic.
+
+| Class | High-value external behavior | Preferred architecture | Important validation axes |
+|---|---|---|---|
+| Resistor / shunt / network | nominal value and tolerance, TCR/PCR, voltage coefficient, parasitic L/C, noise or pulse behavior if evidenced | ideal R for nominal low-frequency scope; temperature/power law and distributed or lumped parasitics only when sourced | value/tolerance, temperature/power, impedance versus frequency, pulse condition |
+| Capacitor / supercapacitor | capacitance/tolerance, ESR/ESL, leakage, dissipation/Q, DC-bias/temp/frequency dependence, aging or absorption if evidenced | series/parallel RLC plus source-backed charge, loss ladder, leakage or slow states | C/ESR/impedance versus bias/frequency/temp, SRF, leakage, transient/energy |
+| Inductor / choke / ferrite | inductance/tolerance, DCR, Q/loss, current bias/saturation, impedance and SRF | R-L-C or source-fitted passive network; nonlinear flux/core-loss state only with sufficient evidence | L/Z/Q versus frequency/current/temp, saturation, loss, SRF |
+| Transformer / coupled magnetic | turns ratio, magnetizing/leakage inductance, coupling, winding resistance, capacitance, core loss/saturation | coupled inductors plus sourced winding/core/parasitic network; hysteretic state only with identified data | ratio/polarity, open/short impedance, leakage, frequency/load, saturation/loss |
+| Thermistor / PTC / varistor / sensor-like passive | R-T or I-V law, tolerance, dissipation, thermal time constant, voltage/current dependence | source-backed nonlinear constitutive law with optional thermal state | curve anchors, self-heating, transient thermal response, declared electrical envelope |
+| Crystal / ceramic resonator | series/parallel resonance, motional R/L/C, shunt C, Q and load condition | Butterworth-Van Dyke or other source-identified equivalent network | resonance/antiresonance, impedance/phase, Q, load capacitance |
+| Operational amplifier | offset/bias, AOL/GBW, slew, output swing/current, shutdown | coupled input error + dominant pole + slew-limited state + output stage | DC/AC, load swing, slew, supply/common-mode |
+| Comparator / supervisor | threshold, hysteresis, delay vs overdrive, output topology, UVLO | differential decision state + delay + actual push-pull/open collector stage | rising/falling thresholds, load, pull-up, supply ramp |
+| Voltage reference / temperature sensor | nominal, initial error, drift, load regulation, start | reference source with published line/load/temp terms | line/load/temp/startup |
+| LDO / linear regulator | reference, loop, dropout, current limit, thermal/enable | error loop + pass-output impedance + current/state limits | line/load steps, dropout, start/disable, output capacitor range |
+| Buck / boost / buck-boost | regulation, switching/control, current limit, efficiency, protection | averaged, switching/state, or hybrid model selected from the required observable contract; averaged models cannot claim switching observables | startup, line/load, CCM/DCM boundary, short, compensation, cost |
+| Gate / motor / LED driver | input thresholds, timing, dead time, output impedance, protection | event/state logic plus output power stage; average power path when appropriate | timing, source/sink load, bootstrap, fault/retry |
+| Current sensor | transfer, offset, bandwidth, output limit | coupled sensing transfer + pole + output stage | gain/error vs common-mode/current/frequency |
+| Logic gate / buffer / level shifter | VIH/VIL, VOH/VOL, tri-state, delay, current | native logic/XSPICE when event behavior matters; B/switch otherwise | all states, enable, fanout, supply, timing |
+| Analog switch / multiplexer | Ron/leakage, charge injection if evidenced, break-before-make | controlled conductance with off leakage and optional charge state | signal range, load, control crossing, multi-channel contention |
+| ADC / DAC | static transfer accuracy (offset, gain, INL/DNL or calibration when sourced), reference, quantization, acquisition/latency, output drive | XSPICE/event architecture when code semantics matter; sampled behavioral model otherwise; couple the source-backed transfer relation to acquisition and code state | source-conditioned transfer thresholds/curve anchors, endpoint saturation, missing-code/monotonicity claims when sourced, calibration, latency, reference/supply |
+| Oscillator / PLL / timer | frequency, duty, jitter/noise only if evidenced, lock/start | phase/state model; XSPICE for digital counters | start, supply/temp, control sweep, lock/transient cost |
+| Optocoupler / isolation | CTR/delay, input loading, output topology, isolation limits | input LED current to documented transfer/delay/output block | CTR corners, saturation, timing, supply/output load |
+| Interface transceiver | thresholds, termination, driver/receiver states, enable/fault | directional state machine + finite output/termination | contention, termination, common-mode, disable/fault |
+| Power MOSFET / BJT / diode / Zener / TVS | I-V, capacitance, charge, avalanche/clamp, thermal if evidenced | source-supported native, compact, charge/state, or behavioral representation | DC curves, capacitance/dynamic, pulse/SOA boundary |
+
+
+Read the matching detailed recipe: [passives](passives.md), [discrete semiconductors](discrete.md), [op-amps](opamps.md), [switching/oscillators](switching.md), or [stateful interfaces](state-interfaces.md). Other rows require a task-specific architecture; a strategy row is not a completed recipe. Use cross-family [charge](../mechanisms/charge.md), [noise](../mechanisms/noise.md) and [temperature](../mechanisms/temperature.md) instead of copying their rules. For unlisted devices, classify external energy/state domains and derive the contract before promoting a new family recipe.
+
+A newly derived recipe remains provisional until representative source-backed use has exercised its material behavior and boundary. Keep that distinction from an established recipe; neither status transfers another device's qualification. Promote reusable lessons under [rule placement](../maintenance/rule-placement.md).

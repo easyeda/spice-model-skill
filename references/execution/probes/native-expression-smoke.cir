@@ -1,0 +1,23 @@
+* Native CLI B-source expression smoke deck for ngspice.
+* Its .control block is not a host-API validation path.
+* Parser/elementary-semantics check only; it is not a device qualification.
+Vx x 0 0.25
+Bternary ternary 0 V = V(x) < 0 ? -1 : 1
+Bu unit 0 V = u(V(x))
+Bu2 unit2 0 V = u2(V(x))
+Buramp ramp 0 V = uramp(V(x))
+Btanh soft 0 V = tanh(V(x))
+Bclip clip 0 V = V(x) < -0.2 ? -0.2 : V(x) > 0.2 ? 0.2 : V(x)
+Rternary ternary 0 1Meg
+Ru unit 0 1Meg
+Ru2 unit2 0 1Meg
+Rramp ramp 0 1Meg
+Rsoft soft 0 1Meg
+Rclip clip 0 1Meg
+.control
+set numdgt=17
+op
+print v(ternary) v(unit) v(unit2) v(ramp) v(soft) v(clip)
+quit
+.endc
+.end

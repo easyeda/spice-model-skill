@@ -1,0 +1,4 @@
+interface:
+  display_name: "ngspice Datasheet Modeling"
+  short_description: "Build datasheet-backed ngspice models."
+  default_prompt: "Use $spice-chip-modeling v1.1.2 to build or validate a source-supported native ngspice model from its technical sources."

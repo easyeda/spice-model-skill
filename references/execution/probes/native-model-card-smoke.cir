@@ -1,0 +1,21 @@
+* ngspice native CLI primitive-model-card syntax smoke
+* This deck validates only the reference card layout. A delivered library must
+* still be included verbatim in its own clean-load check.
+* Its .control block is not a host-API validation path.
+VCC vcc 0 5
+RC vcc c 10k
+VBE b 0 0.70
+Q1 c b 0 QOK
+VD an 0 0.70
+RD an d 1k
+D1 d 0 DOK
+.model QOK NPN (IS=1e-15 BF=100 VAF=50)
+.model DOK D (IS=1e-14 N=1 RS=0.1)
+.op
+.control
+run
+echo NATIVE_MODEL_CARD_SMOKE_DONE
+print v(c) v(d)
+quit
+.endc
+.end

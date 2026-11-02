@@ -1,0 +1,13 @@
+* Native CLI behavioral-capacitor Q= smoke for ngspice.
+* Its .control block is not a host-API validation path.
+* Parser and elementary charge-form check only; it is not a device qualification.
+Vx x 0 0.25
+Cq x 0 Q={1n*V(x) + 0.5n*uramp(V(x)-1)*uramp(V(x)-1)}
+Rx x 0 1Meg
+.control
+set numdgt=17
+op
+print v(x)
+quit
+.endc
+.end
