@@ -2,7 +2,7 @@
 
 <a id="en"></a>
 
-# spice-chip-modeling — Turn device datasheets into ngspice models with AI
+# spice-modeling — Turn device datasheets into ngspice models with AI
 
 Hand your vendor datasheet (PDF) to an AI assistant. It reads the device behavior, builds a **native ngspice** model, runs simulations to verify it, and gives you back a model file you can `include` directly, plus a short write-up.
 
@@ -41,24 +41,24 @@ This is a **skill** (a packaged instruction set), not a standalone application, 
 
 ### Step 2: put the skill into your skills directory
 
-A skill is just a folder. Place it in your AI assistant's skills directory, and **name the folder `spice-chip-modeling`** (matching the skill name inside the package — the safest choice).
+A skill is just a folder. Place it in your AI assistant's skills directory, and **name the folder `spice-modeling`** (matching the skill name inside the package — the safest choice).
 
 **Windows (PowerShell)**
 
 ```powershell
 # Option A: clone from GitHub (recommended; easy to update later)
-git clone https://github.com/easyeda/spice-model-skill.git "$env:USERPROFILE\.claude\skills\spice-chip-modeling"
+git clone https://github.com/easyeda/spice-model-skill.git "$env:USERPROFILE\.claude\skills\spice-modeling"
 ```
 
 ```powershell
 # Option B: you already have the folder — copy it
-Copy-Item -Recurse "D:\your\path\spice-model-skill" "$env:USERPROFILE\.claude\skills\spice-chip-modeling"
+Copy-Item -Recurse "D:\your\path\spice-model-skill" "$env:USERPROFILE\.claude\skills\spice-modeling"
 ```
 
 The result should look like this:
 
 ```text
-C:\Users\<your-name>\.claude\skills\spice-chip-modeling\
+C:\Users\<your-name>\.claude\skills\spice-modeling\
 ├── SKILL.md          ← skill entry point, required
 ├── references\       ← modeling, validation and syntax references
 ├── scripts\          ← Python helper scripts
@@ -69,7 +69,7 @@ C:\Users\<your-name>\.claude\skills\spice-chip-modeling\
 **macOS / Linux**
 
 ```bash
-git clone https://github.com/easyeda/spice-model-skill.git ~/.claude/skills/spice-chip-modeling
+git clone https://github.com/easyeda/spice-model-skill.git ~/.claude/skills/spice-modeling
 ```
 
 > The skills directory name differs between tools (some use `~/.config/<tool>/skills`). The rule is the same: **one folder per skill, and the folder must contain `SKILL.md`.**
@@ -83,7 +83,7 @@ git clone https://github.com/easyeda/spice-model-skill.git ~/.claude/skills/spic
    Which skills can you use right now?
    ```
 
-3. Seeing `spice-chip-modeling` in the answer means it loaded.
+3. Seeing `spice-modeling` in the answer means it loaded.
 
 If it does not appear, check three things: `SKILL.md` is in the folder root, the folder is in the correct skills directory, and you started a new session.
 
@@ -176,10 +176,10 @@ R2 out 0 1k
 }
 ```
 
-First prepare the engine (this step downloads ngspice when it is missing). Run it from the skill directory, or spell out the script path — below assumes the skill is installed at `C:\Users\<your-name>\.claude\skills\spice-chip-modeling`:
+First prepare the engine (this step downloads ngspice when it is missing). Run it from the skill directory, or spell out the script path — below assumes the skill is installed at `C:\Users\<your-name>\.claude\skills\spice-modeling`:
 
 ```text
-python "C:\Users\<your-name>\.claude\skills\spice-chip-modeling\scripts\provisioning.py" --cache .tools\ngspice
+python "C:\Users\<your-name>\.claude\skills\spice-modeling\scripts\provisioning.py" --cache .tools\ngspice
 ```
 
 It prints a JSON document: `path` is the usable ngspice executable, and `action` says whether an existing installation was reused (`reused`) or a new one was installed (`installed`). `--cache` is where the engine is kept — here inside the scratch directory as `.tools\ngspice`.
@@ -187,7 +187,7 @@ It prints a JSON document: `path` is the usable ngspice executable, and `action`
 Then run the analysis (execute this from the directory containing `case.json`; pass the `path` value to `--engine`; `--output` must be a directory that **does not exist yet**):
 
 ```text
-python "C:\Users\<your-name>\.claude\skills\spice-chip-modeling\scripts\run_analysis.py" --manifest case.json --engine <value of path> --output run1
+python "C:\Users\<your-name>\.claude\skills\spice-modeling\scripts\run_analysis.py" --manifest case.json --engine <value of path> --output run1
 ```
 
 If `result.json` reports `PASS` with `out ≈ 1 V`, then Python, the engine and the runner are all wired up correctly.
@@ -275,7 +275,7 @@ agents/openai.yaml          Display metadata for other AI tools
 
 <a id="zh"></a>
 
-# spice-chip-modeling — 用 AI 把芯片 datasheet 变成 ngspice 模型
+# spice-modeling — 用 AI 把芯片 datasheet 变成 ngspice 模型
 
 [↑ English](#en)
 
@@ -316,24 +316,24 @@ agents/openai.yaml          Display metadata for other AI tools
 
 ### 第 2 步：把技能包放进 skills 目录
 
-技能就是一个文件夹。把它放到你的 AI 助手的 skills 目录里，**文件夹名建议用 `spice-chip-modeling`**（和包内的技能名一致，最稳妥）。
+技能就是一个文件夹。把它放到你的 AI 助手的 skills 目录里，**文件夹名建议用 `spice-modeling`**（和包内的技能名一致，最稳妥）。
 
 **Windows（PowerShell）**
 
 ```powershell
 # 方式 A：从 GitHub 克隆（推荐，方便以后更新）
-git clone https://github.com/easyeda/spice-model-skill.git "$env:USERPROFILE\.claude\skills\spice-chip-modeling"
+git clone https://github.com/easyeda/spice-model-skill.git "$env:USERPROFILE\.claude\skills\spice-modeling"
 ```
 
 ```powershell
 # 方式 B：已经有这个文件夹了，直接复制过去
-Copy-Item -Recurse "D:\你的路径\spice-model-skill" "$env:USERPROFILE\.claude\skills\spice-chip-modeling"
+Copy-Item -Recurse "D:\你的路径\spice-model-skill" "$env:USERPROFILE\.claude\skills\spice-modeling"
 ```
 
 装完应该长这样：
 
 ```text
-C:\Users\<你的用户名>\.claude\skills\spice-chip-modeling\
+C:\Users\<你的用户名>\.claude\skills\spice-modeling\
 ├── SKILL.md          ← 技能入口，必须有
 ├── references\       ← 建模、验证、语法等参考文档
 ├── scripts\          ← Python 助手脚本
@@ -344,7 +344,7 @@ C:\Users\<你的用户名>\.claude\skills\spice-chip-modeling\
 **macOS / Linux**
 
 ```bash
-git clone https://github.com/easyeda/spice-model-skill.git ~/.claude/skills/spice-chip-modeling
+git clone https://github.com/easyeda/spice-model-skill.git ~/.claude/skills/spice-modeling
 ```
 
 > 不同的 AI 工具 skills 目录名可能不同（例如有些工具用 `~/.config/<工具名>/skills`）。规则是一样的：**一个技能一个文件夹，文件夹里要有 `SKILL.md`**。
@@ -358,7 +358,7 @@ git clone https://github.com/easyeda/spice-model-skill.git ~/.claude/skills/spic
    你现在能用哪些技能？
    ```
 
-3. 看到 `spice-chip-modeling` 就说明装载成功。
+3. 看到 `spice-modeling` 就说明装载成功。
 
 如果没看到，检查三件事：`SKILL.md` 是否在文件夹根目录、文件夹是否放对了 skills 目录、是否开了新会话。
 
@@ -451,10 +451,10 @@ R2 out 0 1k
 }
 ```
 
-先准备引擎（没有 ngspice 时这一步会下载）。注意要在**技能目录**下执行，或者把脚本路径写全 —— 下面假设技能装在 `C:\Users\<你的用户名>\.claude\skills\spice-chip-modeling`：
+先准备引擎（没有 ngspice 时这一步会下载）。注意要在**技能目录**下执行，或者把脚本路径写全 —— 下面假设技能装在 `C:\Users\<你的用户名>\.claude\skills\spice-modeling`：
 
 ```text
-python "C:\Users\<你的用户名>\.claude\skills\spice-chip-modeling\scripts\provisioning.py" --cache .tools\ngspice
+python "C:\Users\<你的用户名>\.claude\skills\spice-modeling\scripts\provisioning.py" --cache .tools\ngspice
 ```
 
 它会输出一段 JSON：`path` 就是可用的 ngspice 可执行文件路径，`action` 说明是复用了已有安装（`reused`）还是新装（`installed`）。`--cache` 是引擎的存放目录，这里放进当前临时目录的 `.tools\ngspice`。
@@ -462,7 +462,7 @@ python "C:\Users\<你的用户名>\.claude\skills\spice-chip-modeling\scripts\pr
 再跑分析（回到放着 `case.json` 的目录执行；`--engine` 填上面的 `path` 的值；`--output` 必须是一个**还不存在**的目录）：
 
 ```text
-python "C:\Users\<你的用户名>\.claude\skills\spice-chip-modeling\scripts\run_analysis.py" --manifest case.json --engine <path 的值> --output run1
+python "C:\Users\<你的用户名>\.claude\skills\spice-modeling\scripts\run_analysis.py" --manifest case.json --engine <path 的值> --output run1
 ```
 
 看到 `result.json` 里状态为 `PASS`、`out ≈ 1 V`，说明 Python、引擎、运行器整条链路是通的。

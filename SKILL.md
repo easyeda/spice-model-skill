@@ -1,5 +1,5 @@
 ---
-name: spice-chip-modeling
+name: spice-modeling
 description: Build, audit, or validate native ngspice models from datasheets and public technical sources for passive components, semiconductors, ICs, and composed circuits.
 metadata:
   short-description: Evidence-based native ngspice model generation
